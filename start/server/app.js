@@ -1,6 +1,6 @@
 const express = require("express");
-require("./persistence/connection");
-const { PORT } = require("./config");
+require("../persistence/connection");
+const { PORT } = require("../config");
 
 const app = express();
 app.get("/", (req, res) => {
