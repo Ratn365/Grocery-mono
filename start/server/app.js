@@ -1,18 +1,22 @@
 const express = require("express");
 require("../persistence/connection");
+
 const { PORT } = require("../config");
+const expressApp = require("./express-app");
 
-const app = express();
-app.get("/", (req, res) => {
-  // throw new Error("error");
-  res.send("Hello World!");
-});
+const StartServer = async () => {
+  const app = express();
 
-app
-  .listen(PORT || 3000, () => {
-    console.log(` app listening on port ${PORT}`);
-  })
-  .on("error", (err) => {
-    console.log(err);
-    process.exit();
-  });
+  await expressApp(app);
+
+  app
+    .listen(PORT || 3000, () => {
+      console.log(` app listening on port ${PORT}`);
+    })
+    .on("error", (err) => {
+      console.log(err);
+      process.exit();
+    });
+};
+
+StartServer();
